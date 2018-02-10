@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Business;
+use App\BusinessComment;
 use Session;
 use Pagination;
 use Purifier;
@@ -27,7 +28,7 @@ class BusinessController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $businesss = Business::paginate(10);
+        $businesss = Business::paginate();
         return view('admin.business.index')->with('businesss', $businesss); 
     }
 
@@ -96,9 +97,10 @@ class BusinessController extends Controller
      */
     public function show($id)
     {
-        $business = Business::find($id);
+        $business = Business::findorFail($id);
+        $businesscomment = BusinessComment::paginate($id);
 
-        return view('admin.business.show')->with('business', $business);
+        return view('admin.business.show')->with('business', $business)->with('businesscomment', $businesscomment);
     }
 
     /**

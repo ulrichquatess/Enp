@@ -24,7 +24,7 @@ class NewsController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $news= Article::paginate(10);
+        $news= Article::paginate();
         return view('admin.new.index')->with('news', $news); 
     }
 

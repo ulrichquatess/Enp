@@ -24,13 +24,13 @@ Route::group(['middleware' => ['web']], function(){
 
 	//Registration Routes Here we comment the registration Page BLS the people viewing it dont have to sign
 
-	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
-	Route::post('register', 'Auth\RegisterController@register');
+//	Route::post('register', 'Auth\RegisterController@register');
 
 	// Password Reset
 
-	Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+	  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
@@ -53,13 +53,17 @@ Route::group(['middleware' => ['web']], function(){
     /** The below controller works for the backend **/ 
     //Route::resource('project', 'ProjectController');
   Route::get('/dashboard', 'BlogController@dashboard');
-	Route::resource('entrepreneur', 'EntrepreneurController');
+  Route::resource('entrepreneur', 'EntrepreneurController');
   Route::resource('business', 'BusinessController');
   Route::resource('technology', 'TechnologyController');
   Route::resource('new', 'NewsController');
   Route::resource('team', 'TeamController');
   Route::resource('social', 'SocialController');
-  Route::resource('profile', 'ProfileController');
+  Route::resource('religion', 'ReligionController');
+  Route::resource('category', 'CategoryController');
+  Route::resource('health', 'HealthController');
+  Route::resource('artist', 'ArtistController');
+
 	/** It Ends Here **/
 
   //Here we are manualling add our commets the comment bellow handles entrepreneur
@@ -69,6 +73,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('comments/{id}/edit',  ['as' => 'comments.edit', 'uses' => 'CommentController@edit']);
 
     Route::put('comments/{id}',  ['as' => 'comments.update', 'uses' => 'CommentController@update']);
+
+    Route::get('comments/{id}',  ['as' => 'comments.show', 'uses' => 'CommentController@show']);
 
     Route::delete('comments/{id}',  ['as' => 'comments.destroy', 'uses' => 'CommentController@destroy']);
 

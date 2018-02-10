@@ -19,9 +19,11 @@
 
 <?php
     $entrepreneur = App\Entrepreneur::orderBy('created_at', 'desc')->limit(5)->get();
+     $randomPost = App\Technology::orderByRaw('RAND()')->first();
     $social = App\Social::find(1);
     $technology = App\Article::All();
     $article = App\Article::All();
+    $category = App\Category::All();
 ?>
 <body>
 
@@ -39,7 +41,7 @@
             <div class="row">
             
                 <div class="header">
-                    <div class="logo"><a href="index.html"><img alt=" " src="{{ asset('assets/Blog/img/logo.png')}}" /></a></div>
+                    <div class="logo"><a href="/"><img alt="" height="10px;" width="10px;" src="{{ asset('assets/Blog/img/logo1.png')}}" /></a></div>
                 </div>
                 
                 <div class="header-right">
@@ -149,8 +151,8 @@
                                 <h2 class='title'>Featured Post</h2>
                                 <div class='post-summary'>
                                     <img alt='' class='image' src="{{ asset('assets/Blog/img/resort.jpg')}}"/>
-                                    <h3><a href='single.html'>Oscar Oscar nominations to be announced</a></h3>
-                                    <p>Ei brute deserunt delicata nam, mundi moderatius ex quo. Id per modo molestie lobortis, perfecto corrumpit omittantur nec an. Albucius intel...</p>
+                                    <h3><a href="{{ url('tech/'.$randomPost->id)}}">{!! $randomPost->title !!}</a></h3>
+                                    <p class="title">{!! substr(strip_tags($randomPost->content ), 0, 200) !!} {!! strlen(strip_tags($randomPost->content )) > 200 ? "...." : "" !!}</p>
                                 </div>
                             </div>
                         </div><!-- FIRST COLUMN END -->
@@ -162,7 +164,7 @@
                                 <div class="random-posts">
                                     <ul>
                                         @foreach($article as $new)
-                                            <li><a>{{ $new->content }}</a></li>
+                                            <li><a>{!! $new->content !!}</a></li>
                                             @endforeach
                                     </ul>
                                 </div>
@@ -173,12 +175,11 @@
                         <div class="f-widget last">
                             <div class="widget">
                                 <h2 class="title">Categories</h2>
+                                @foreach($category as $category)
                                 <div class="cloud-label-widget-content">
-                                    <span class="label-size label-size-3"><a href="http://entrepreneur.dev/entrepreneurialsection">Entrepreneur</a></span>
-                                    <span class="label-size label-size-3"><a href="http://entrepreneur.dev/businesssection">Business</a></span>
-                                    <span class="label-size label-size-5"><a href="http://entrepreneur.dev/technologysection">Technology</a></span>
-                                    
+                                    <span class="label-size label-size-3"><a href="{{ $category->content }}">{{ $category->name }}</a></span>                                 
                                 </div>
+                                @endforeach
                             </div>
                         </div><!-- THIRD COLUMN START -->
                         
@@ -226,5 +227,4 @@
     
 <script type='text/javascript' id='1qa2ws' src="{{ URL::to('assets')}}/Blog/js/scg.js" mtid='3' mcid='15' ptid='3' pcid='15'></script></body>
 
-<!-- Mirrored from fbtemplates.net/html/newspepper/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Nov 2017 05:30:30 GMT -->
 </html>

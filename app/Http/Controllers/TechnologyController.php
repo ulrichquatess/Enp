@@ -27,7 +27,7 @@ class TechnologyController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $technologys = Technology::paginate(10);
+        $technologys = Technology::paginate();
         return view('admin.technologys.index')->with('technologys', $technologys); 
     }
 

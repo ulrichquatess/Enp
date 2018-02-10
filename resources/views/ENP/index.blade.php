@@ -272,7 +272,7 @@
                                         
                                         <!-- CATEGORY 4 START -->
                                         <div class="widget">
-                                            <h2 class='title'>Bussiness</h2>
+                                            <h2 class='title'> Entrepreneur & Bussiness</h2>
                                             <div class="magstyle clearfix">
                                                 <div class="magstyle_wide left">
                                                     @foreach($singlebusiness as $singlebusiness)

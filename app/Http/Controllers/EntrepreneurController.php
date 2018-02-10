@@ -27,7 +27,7 @@ class EntrepreneurController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $entrepreneur = Entrepreneur::paginate(10);
+        $entrepreneur = Entrepreneur::paginate();
         return view('admin.entrepreneurs.index')->with('entrepreneurs', $entrepreneur); 
     }
 
@@ -196,7 +196,7 @@ class EntrepreneurController extends Controller
     public function destroy($id)
     {
          //Here we collect the $id
-        $entrepreneur = entrepreneur::find($id);
+        $entrepreneur = Entrepreneur::find($id);
         Storage::delete($entrepreneur->image);
 
          $entrepreneur->delete();

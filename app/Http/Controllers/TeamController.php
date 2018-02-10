@@ -27,7 +27,7 @@ class TeamController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $teams = Team::paginate(10);
+        $teams = Team::paginate();
         return view('admin.team.index')->with('teams', $teams); 
     }
 

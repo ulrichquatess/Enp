@@ -51,7 +51,11 @@ class SocialController extends Controller
         $this->validate($request, [
                'facebook' => 'required',
                'twitter' => 'required',
-               'linkedin' => 'required'
+               'linkedin' => 'required',
+               'instagram' => 'required',
+               'email' => 'required',
+               'address' => 'required',
+               'phone' => 'required'
                
           ]);
 
@@ -62,6 +66,10 @@ class SocialController extends Controller
          $social->facebook = $request->input('facebook');
          $social->twitter = $request->input('twitter');
          $social->linkedin = $request->input('linkedin');
+         $social->instagram = $request->input('instagram');
+         $social->email = $request->input('email');
+         $social->address = $request->input('address');
+         $social->phone = $request->input('phone');
         
 
          //save
@@ -112,7 +120,11 @@ class SocialController extends Controller
              $this->validate($request, [
                'facebook' => 'required',
                'twitter' => 'required',
-               'linkedin' => 'required'
+               'linkedin' => 'required',
+               'instagram' => 'required',
+               'email' => 'required',
+               'address' => 'required',
+               'phone' => 'required'
           ]); 
     
 
@@ -123,6 +135,10 @@ class SocialController extends Controller
          $social->facebook = $request->input('facebook');
          $social->twitter = $request->input('twitter');
          $social->linkedin = $request->input('linkedin');
+         $social->instagram = $request->input('instagram');
+         $social->email = $request->input('email');
+         $social->address = $request->input('address');
+         $social->phone = $request->input('phone');
             
 
             $social->save(); // this is the part that updates the changes      

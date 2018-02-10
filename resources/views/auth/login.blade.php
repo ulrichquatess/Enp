@@ -1,40 +1,37 @@
 @extends('layouts.admin')
 @section('content')
-    <body>
-        <div class="container">
-                <h1><br><br></h1>
-            <section>       
-                <div id="container_demo" >
-                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
-                    <div id="wrapper">
-                        <div id="login" class="animate form">
-                            {!! Form::open() !!}
-                                <h1>Log in</h1> 
-                                <div>
-                                <p> 
-                                    {{ Form::label('email', 'Your email:') }}
-                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => " mymail@mail.com"]) }}                                    
-                                </p>
-                                @if ($errors->has('email'))
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/Blog/css/login.css') }}">
+<div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            {!! Form::open() !!}
+            <div class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+                     @if ($errors->has('email'))
                                   <p class="help is-danger">{{$errors->first('email')}} </p>
                                 @endif
-                            </div><br>
-                                <p> 
-                                  {{ Form::label('password', 'Your password') }}
-                                    {{ Form::password('password', ['class' => 'form-control', ' placeholder' => 'eg. X8df!90EO']) }} 
-                                </p>
-                                @if ($errors->has('password'))
+
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                @if ($errors->has('password'))
                                   <p class="help is-danger">{{$errors->first('password')}} </p>
                                 @endif
-                                <p class="signin button"> 
-                  <input type="submit" value="Log in"/> 
-                </p>   
-                            {!! Form::close() !!}
-                        </div>
-                    </div>
-                </div>  
-            </section>
-        </div>
+
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            {!! Form::close() !!} <!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <script src="{{URL::to('assets')}}/Blog/js/login.js"></script>
         @endsection

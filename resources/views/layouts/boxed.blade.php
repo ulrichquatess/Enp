@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ config('', 'Entrepreneurs Bloggers') }}</title>
+  <title>{{ config('', 'Quatess Bloggers') }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -25,6 +25,9 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <!-- tHIS lINE fOR THE Table -->
+  <link rel="stylesheet" href="{{asset('assets/Health/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -39,7 +42,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b>NP</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>{{ config('', 'Entrepreneurs Bloggers') }}</b></span>
+      <span class="logo-lg"><b>{{ config('', 'Quatess Bloggers') }}</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -126,7 +129,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('business.create')}}"><i class="fa fa-circle-o"></i>Create New Business Topic</a></li>
-            <li><a href="{{ route('business.index')}}"><i class="fa fa-circle-o"></i>Visit All Health Topic</a></li>
+            <li><a href="{{ route('business.index')}}"><i class="fa fa-circle-o"></i>Visit All Business Topic</a></li>
           </ul>
         </li>
 
@@ -171,14 +174,56 @@
 
         <li class="treeview">
           <a>
+            <i class="fa fa-edit"></i> <span>Religion Section</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('religion.create')}}"><i class="fa fa-circle-o"></i>Create A New Religion Topic</a></li>
+            <li><a href="{{ route('religion.index')}}"><i class="fa fa-circle-o"></i>See all Religion Topic</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a>
+            <i class="fa fa-edit"></i> <span>Health Tips Section</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('health.create')}}"><i class="fa fa-circle-o"></i>Create A New Health Topic</a></li>
+            <li><a href="{{ route('health.index')}}"><i class="fa fa-circle-o"></i>See all Health Topic</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a>
+            <i class="fa fa-edit"></i> <span>Celebrities Section</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('artist.create')}}"><i class="fa fa-circle-o"></i>Create A New Celebrity Topic</a></li>
+            <li><a href="{{ route('artist.index')}}"><i class="fa fa-circle-o"></i>See all Celebrity Topic</a></li>
+          </ul>
+        </li>
+
+
+        <li class="treeview">
+          <a>
             <i class="fa fa-edit"></i> <span>Paramètres</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('profile.index')}}"><i class="fa fa-circle-o"></i>Manage User Profile</a></li>
-            <li><a href="{{ route('social.index')}}"><i class="fa fa-circle-o"></i>Create Websites Social Icons</a></li>
+            <li><a href="{{ route('social.create')}}"><i class="fa fa-circle-o"></i>Create Setting</a></li>
+            <li><a href="{{ route('social.index')}}"><i class="fa fa-circle-o"></i>Show Settings</a></li>
+            <li><a href="{{ route('category.create')}}"><i class="fa fa-circle-o"></i>Create Category</a></li>
+            <li><a href="{{ route('category.index')}}"><i class="fa fa-circle-o"></i>Show all Category</a></li>
           </ul>
         </li>
 
@@ -214,6 +259,9 @@
 <script src="{{URL::to('assets')}}/Health/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{URL::to('assets')}}/Health/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="{{URL::to('assets')}}/Health/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{URL::to('assets')}}/Health/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="{{URL::to('assets')}}/Health/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -222,5 +270,18 @@
 <script src="{{URL::to('assets')}}/Health/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{URL::to('assets')}}/Health/dist/js/demo.js"></script>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 </body>
 </html>

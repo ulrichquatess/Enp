@@ -55,7 +55,10 @@ class CommentController extends Controller
         $comment->name = $request->name;
         $comment->email = $request->email;
         $comment->comment = $request->comment;
-        $comment->approved = true;
+        $comment->reply = $request->reply;
+        $comment->reply_name = $request->reply_name;
+        $comment->approve = $request->approve;
+
         $comment->entrepreneur()->associate($entrepreneur);
 
         $comment->save();
@@ -83,7 +86,7 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::find($id);
-        return view('comments.edit')->withComment($comment);
+        return view('admin.comments.edit')->withComment($comment);
     }
 
     /**
@@ -98,14 +101,13 @@ class CommentController extends Controller
         $comment = Comment::find($id);
 
         $this->validate($request, array(
-            'name' =>'required',
-            'email' =>'required',
-            'comment' => 'required'
+           'approve' => 'required'
         ));
 
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
+
+        $comment->reply = $request->reply;
+        $comment->reply_name = $request->reply_name;
+        $comment->approve = $request->approve;
         $comment->save();
 
 
@@ -116,7 +118,7 @@ class CommentController extends Controller
          {
             $comment = Comment::find($id);
 
-            return view('comments.delete')->withComment($comment);
+            return view('admin.comments.delete')->withComment($comment);
          }
 
     /**

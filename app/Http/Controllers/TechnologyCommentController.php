@@ -51,14 +51,17 @@ class TechnologyCommentController extends Controller
         $technology = Technology::find($technology_id);
         
 
-        $comment = new TechnologyComment();
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->approved = true;
-        $comment->technology()->associate($technology);
+        $technologycomment = new TechnologyComment();
+        $technologycomment->name = $request->name;
+        $technologycomment->email = $request->email;
+        $technologycomment->comment = $request->comment;
+        $technologycomment->reply = $request->reply;
+        $technologcomment->reply_name = $request->reply_name;
+        $technologybusinesscomment->approve = $request->approve;
 
-        $comment->save();
+        $technologycomment->technology()->associate($technology);
+
+        $technologycomment->save();
 
         return redirect()->route('ENP.single-technology', $technology->id);
     }
@@ -82,8 +85,8 @@ class TechnologyCommentController extends Controller
      */
     public function edit($id)
     {
-        $comment = TechnologyComment::find($id);
-        return view('technologycomments.edit')->withComment($comment);
+        $technologycomment = TechnologyComment::find($id);
+        return view('admin.technologycomments.edit')->withTechnologycomment($technologycomment);
     }
 
     /**
@@ -95,26 +98,24 @@ class TechnologyCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = TechnologyComment::find($id);
+        $technologycomment = TechnologyComment::find($id);
 
         $this->validate($request, array(
-            'name' =>'required',
-            'email' =>'required',
-            'comment' => 'required'
+
         ));
 
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->save();
+        $technologycomment->reply = $request->reply;
+        $technologycomment->reply_name = $request->reply_name;
+        $technologycomment->approve = $request->approve;
+        $technologycomment->save();
 
 
-        return redirect()->route('technologycomment.show', $comment->technology->id);
+        return redirect()->route('technology.show', $technologycomment->technology->id);
     }
 
         public function delete($id)
          {
-            $comment = TechnologyComment::find($id);
+            $technologycomment = TechnologyComment::find($id);
 
             return view('technologycomments.delete')->withComment($comment);
          }
@@ -127,10 +128,10 @@ class TechnologyCommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = TechnologyComment::find($id);
-        $technology_id = $comment->technology->id;
-        $comment->delete();
+        $technologycomment = TechnologyComment::find($id);
+        $technology_id = $technologycomment->technology->id;
+        $technologycomment->delete();
 
-        return redirect()->route('technologycomments.show', $technology_id);
+        return redirect()->route('technology.show', $technology_id);
     }
 }

@@ -51,14 +51,17 @@ class BusinessCommentController extends Controller
         $business = Business::find($business_id);
         
 
-        $comment = new BusinessComment();
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->approved = true;
-        $comment->business()->associate($business);
+        $businesscomment = new BusinessComment();
+        $businesscomment->name = $request->name;
+        $businesscomment->email = $request->email;
+        $businesscomment->comment = $request->comment;
+        $businesscomment->reply = $request->reply;
+        $businesscomment->reply_name = $request->reply_name;
+        $businesscomment->approve = $request->approve;
 
-        $comment->save();
+        $businesscomment->business()->associate($business);
+
+        $businesscomment->save();
 
         return redirect()->route('ENP.single-business', $business->id);
     }
@@ -82,8 +85,8 @@ class BusinessCommentController extends Controller
      */
     public function edit($id)
     {
-        $comment = BusinessComment::find($id);
-        return view('businesscomments.edit')->withComment($comment);
+        $businesscomment = BusinessComment::find($id);
+        return view('admin.businesscomments.edit')->with('businesscomment', $businesscomment);
     }
 
     /**
@@ -95,28 +98,26 @@ class BusinessCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = BusinessComment::find($id);
+        $businesscomment = BusinessComment::find($id);
 
         $this->validate($request, array(
-            'name' =>'required',
-            'email' =>'required',
-            'comment' => 'required'
+            'approve' => 'required'
         ));
 
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->save();
+        $businesscomment->reply = $request->reply;
+        $businesscomment->reply_name = $request->reply_name;
+        $businesscomment->approve = $request->approve;
+        $businesscomment->save();
 
 
-        return redirect()->route('businesscomments.show', $comment->business->id);
+        return redirect()->route('business.show', $businesscomment->business->id);
     }
 
         public function delete($id)
          {
-            $comment = BusinessComment::find($id);
+            $businesscomment = BusinessComment::find($id);
 
-            return view('businesscomments.delete')->withComment($comment);
+            return view('admin.businesscomments.delete')->with('businesscomment', $businesscomment);
          }
 
     /**
@@ -127,10 +128,10 @@ class BusinessCommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = BusinessComment::find($id);
-        $business_id = $comment->business->id;
-        $comment->delete();
+        $businesscomment = BusinessComment::find($id);
+        $business_id = $businesscomment->business->id;
+        $businesscomment->delete();
 
-        return redirect()->route('businesscomments.show', $business_id);
+        return redirect()->route('business.show', $business_id);
     }
 }

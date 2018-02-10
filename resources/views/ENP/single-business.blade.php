@@ -13,24 +13,6 @@
     <div class="container">
         <div class="row">   
         
-            <div class="tabs-menu clearfix">
-                <div class="left-area">
-                    Left Sidebar
-                </div>
-                <div class="left-area-2">
-                    Left Sidebar
-                </div>
-                <div class="center-area">
-                    Featured News
-                </div>
-                <div class="right-area">
-                    Right Sidebar
-                </div>
-                <div class="right-area-2">
-                    Right Sidebar
-                </div>
-            </div>
-        
             <div id="outer-wrapper" class="clearfix">
             
                 <div class="secondary-content clearfix">
@@ -198,63 +180,89 @@
                                 
                                 <!-- TEXT POST -->
                                 <div class="post-body">
-                                    <p>{{ $business->content }}</p>
+                                    <p>{!! $business->content !!}</p>
                                 </div>
                                 
                                 
-                                
-                               <!-- RESPONSIVE AD START -->
-                                <div style="padding: 5px 0 25px;">
-                                    <div style="background: #ddd; color: #bbbbbb; display: inline-block; font-family: &quot;roboto&quot; , sans-serif; font-size: 1.2rem; font-weight: 900; height: 30px; overflow: hidden; padding: 22px 5% 15px; text-align: center; white-space: nowrap; width: 90%;">RESPONSIVE AD AREA</div>
-                                </div><!-- RESPONSIVE AD END -->
+                                <!-- POST SHARE -->
+                                <div class="post-share clearfix">
+                                    <ul>
+                                        <li>
+                                            <a class="facebook df-share" data-sharetip="Share on Facebook!" href="{{ $business->facebook }}" rel="nofollow" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                                        </li>
+                                        <li>
+                                            <a class="twitter df-share" data-hashtags="" data-sharetip="Share on Twitter!" href="{{ $business->twitter }}" rel="nofollow" target="_blank"><i class="fa fa-twitter"></i> Tweeter</a>
+                                        </li>
 
+                                        <li>
+                                            <a class="linkedin df-linkedin" data-sharetip="Pin it" href="{{ $business->linkedin }}" target="_blank"><i class="fa fa-pinterest-p"></i>Linkedin</a>
+                                        </li>
+                                    </ul>
+                                </div>
                                 
                                 <!-- RELATED POST -->
                                 <div class="related-posts clearfix">
                                     <h3><i class='fa fa-pencil-square-o'></i> Similar Articles</h3>
                                     <ul>
-                                        @foreach($lasts as $last) 
+                                        @foreach($lasts as $last)
                                         <li>
                                             <div class="thumbR clearfix">
-                                                <a href="single.html"><img alt="" src="{{ asset('images/business-thumnail/' . $last->image)}}" /></a>
+                                                <a href="{{ url('bussi/'.$last->id)}}"><img alt="" src="{{ asset('images/business-thumnail/' . $last->image)}}" /></a>
                                             </div>
                                             <div class="title">
                                                 <h4><a href="{{ url('bussi/'.$last->id)}}">{{ substr(strip_tags($last->title), 0, 50) }} {{ strlen(strip_tags($last->title)) > 50 ? "..." : ""  }}</a></h4>
                                                 
                                             </div>
                                         </li>
-                                        @endforeach 
+                                        @endforeach
                                     </ul>
                                 </div>
                                 
                                 
                                 <!-- COMMENTS -->
                                 <div id="comments" class="clearfix">
-                                    <h2><i class='fa fa-comments-o'></i> Total Number Of Comments</h2>
+                                    <h2><i class='fa fa-comments-o'></i>{{ $business->businesscomments()->count() }} Comment </h2>
                                     <div class="title-border"></div>
                                     
                                     <ol class="comments_list">
-                                        @foreach($business->businesscomments as $comment) 
+                                        @forelse($business->businesscomments as $comment)
+                                         <?php if ($comment->approve == 1) { ?> 
                                         <li class="comment">
                                             <article-reply>
                                                 <div class="comment_avatar">
-                                                    <img src="{{ asset('assets/Blog/img/music-8.jpg')}}" alt="Avatar">
+                                                    <img src="{{ asset('assets/Health/dist/img/avatar.png')}}" alt="Avatar">
                                                 </div>
                                                 <div class="comment_content">
                                                     <div class="meta">
                                                         <span class="comment_author"><a href="#">{{ $comment->name }}</a></span>
                                                         <span class="comment_date">{{ date( 'M j Y h:ia ', strtotime( $comment->created_at ))}}</span>
                                                     </div>
-                                                    <p>{{ $comment->comment }}</p>
-                                                    <a class='fa fa-comments-o'></a>
+                                                    <p>{{ $comment->comment }} </p>
+                                        
                                                 </div>
                                             </article-reply>
-                                        </li>
-                                        @endforeach 
+                                            <ul class="children">
+                                                <li class="comment">
+                                                    <article-reply>
+                                                        <div class="comment_avatar">
+                                                            <img src="{{ asset('assets/Health/dist/img/avatar04.png')}}" alt="Avatar">
+                                                        </div>
+                                                        <div class="comment_content">
+                                                            <div class="meta">
+                                                                <span class="comment_author"><a href="#">{{ $comment->reply_name }}</a></span>
+                                                                <span class="comment_date">{{ date( 'M j Y h:ia ', strtotime( $comment->updated_at ))}}</span>
+                                                            </div>
+                                                            <p>{{ $comment->reply }}</p>
+                                                        </div>
+                                                    </article-reply>
+                                                </li><?php }?>
+                                                 @empty
+                                                <h4>No Comments</h4>
+                                                @endforelse
                                     </ol>
                                     
                                     <!-- COMMENT FORM -->
-                                    <div class="comment-form clearfix">
+                                <div class="comment-form clearfix">
                                         <h3><i class="fa fa-pencil"></i> Leave a Replay</h3>
                                         
                                         <div class="comments_form">
@@ -279,6 +287,7 @@
                                             {{ Form::close()}}
                                         </div>
                                     </div> 
+                                
                                 </div> 
                                 
                             </div><!-- SINGLE POST END -->
@@ -299,7 +308,7 @@
                                     <h2 class="title">POPULAR POSTS</h2>
                                     <div class="widget-content popular-posts">
                                         <ul>
-                                         @foreach($posts as $post)
+                                        @foreach($posts as $post)
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-thumbnail">
