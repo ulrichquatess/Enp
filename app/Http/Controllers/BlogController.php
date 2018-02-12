@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Entrepreneur;
 use App\Business;
 use App\Technology;
+use App\Job;
+use App\Artist;
 use Pagination;
 use Mail;
 use App\Mail\SendMail;
@@ -28,7 +30,9 @@ class BlogController extends Controller
        //This Part Deals Deals Technology
        $techno = Technology::orderBy('created_at', 'desc')->limit(8)->get();
        $smalltechno = Technology::orderBy('created_at', 'desc')->limit(8)->get();
- 	  return view('ENP.index')->with('entrepreneurs', $entrepreneurs)->with('entre', $entre)->with('update', $update)->with('last', $last)->with('business', $business)->with('singlebusiness', $singlebusiness)->with('techno', $techno)->with('smalltechno', $smalltechno);
+       //this parts load the artis or celebritiest stories on the sidebar
+       $artist = Artist::orderBy('created_at', 'desc')->limit(4)->get();
+ 	    return view('ENP.index')->with('entrepreneurs', $entrepreneurs)->with('entre', $entre)->with('update', $update)->with('last', $last)->with('business', $business)->with('singlebusiness', $singlebusiness)->with('techno', $techno)->with('smalltechno', $smalltechno)->with('artist', $artist);
     }
 
     //This function below is used to load the dashbordnof teh backend page for the admin area
@@ -52,7 +56,6 @@ class BlogController extends Controller
 
 //This one here is in charge of showing allthe entrepruer blogs on one page with pagination
     public function entrepreneur() {
-
       $entrepreneurs = Entrepreneur::paginate(5);
       return view('ENP.entrepreneur')->with('entrepreneurs', $entrepreneurs);    
     }
@@ -69,6 +72,13 @@ class BlogController extends Controller
 
       $technologys = Technology::paginate(5);
       return view('ENP.technology')->with('technologys', $technologys);    
+    }
+
+     //This Parts shows all the archives for the Job Oportunity Topics
+    public function job() {
+
+      $jobs = Job::paginate(5);
+      return view('ENP.job')->with('jobs', $jobs);    
     }
 
 

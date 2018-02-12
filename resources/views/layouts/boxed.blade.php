@@ -211,6 +211,18 @@
           </ul>
         </li>
 
+          <li class="treeview">
+          <a>
+            <i class="fa fa-edit"></i> <span>Job Section</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('job.create')}}"><i class="fa fa-circle-o"></i>Create A Job Topic</a></li>
+            <li><a href="{{ route('job.index')}}"><i class="fa fa-circle-o"></i>See all Job Topic</a></li>
+          </ul>
+        </li>
 
         <li class="treeview">
           <a>

@@ -46,6 +46,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/entrepreneurialsection', 'BlogController@entrepreneur');
     Route::get('/businesssection', 'BlogController@business');
     Route::get('/technologysection', 'BlogController@technology');
+    Route::get('/jobsection', 'BlogController@job');
     Route::get('/teams', 'BlogController@team');
     Route::get('teamm/{id}', ['as' => 'ENP.single-team', 'uses' => 'BlogController@getSingleTeam'])->where('id', '[\w\d\-\_]+');
     //The controller above controls the main pages for the BME technology especially the SolarController
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['web']], function(){
   Route::resource('category', 'CategoryController');
   Route::resource('health', 'HealthController');
   Route::resource('artist', 'ArtistController');
+  Route::resource('job', 'JobController');
 
 	/** It Ends Here **/
 
@@ -104,3 +106,14 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('technologycomments/{id}/delete', ['uses' => 'BusinessCommentController@delete', 'as' => 'technologycomments.delete']); 
 	});
+
+// This is a demo portion
+Route::resource('apply', 'AvoCareersController');
+
+// Demo Here
+Route::get('/file', 'fileController@index');
+Route::get('/file/store', 'fileController@store');
+
+Route::get('upload', 'UploadController@index');
+Route::post('store', 'UploadController@store');
+Route::get('show', 'UploadController@show');

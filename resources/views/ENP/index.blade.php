@@ -1259,46 +1259,20 @@
                                     <h2 class="title">POPULAR POSTS</h2>
                                     <div class="widget-content popular-posts">
                                         <ul>
-                                        
+                                        @foreach($artist as $artist)
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-thumbnail">
-                                                        <a href="single.html"><img alt="" src="img/mobility.jpg"/></a>
+                                                        <a href="single.html"><img alt="" src="{{asset('images/artist/'.$artist->image)}}"/></a>
                                                         <a href="single.html"><div class="overlay"></div></a>
                                                         <div class="item-title">
-                                                            <a href="single.html">What to do Between Training Cycles</a>
+                                                            <a href="single.html">{{ $artist->title}}</a>
                                                         </div>
                                                     </div>
-                                                    <div class="item-snippet">You have two options. The first (and easiest) would be to use this period between marathon training cycles for active rest. Continue to trai...</div>
+                                                    <div class="item-snippet">{{ substr(strip_tags($artist->title), 0, 400) }} {{ strlen(strip_tags($artist->title)) > 400 ? "..." : "" }}</div>
                                                 </div>
                                             </li>
-                                            
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-thumbnail">
-                                                        <a href="single.html"><img alt="" src="img/child.jpg" /></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="item-title">
-                                                            <a href="single.html">Ei his graeci option officiis, no oratio vocent efficiendi vix.</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-snippet">Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna idque, est ve...</div>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-thumbnail">
-                                                        <a href="single.html"><img alt="" src="img/office.jpg" /></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="item-title">
-                                                            <a href="single.html">Ei his graeci option officiis, no oratio vocent efficiendi vix.</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-snippet">Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna idque, est ve...</div>
-                                                </div>
-                                            </li>
-                                            
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

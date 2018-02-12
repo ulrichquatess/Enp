@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Entrepreneur;
+use App\Job;
 use Session;
 use Pagination;
 use Purifier;
 use Image;
 use Storage;
 
-class EntrepreneurController extends Controller
+class JobController extends Controller
 {
 
     public function __construct() { 
@@ -27,8 +27,8 @@ class EntrepreneurController extends Controller
     public function index()
         {
         //This is where we read all our blog post
-        $entrepreneur = Entrepreneur::paginate();
-        return view('admin.entrepreneurs.index')->with('entrepreneurs', $entrepreneur); 
+        $job = Job::paginate();
+        return view('admin.jobs.index')->with('jobs', $job); 
     }
 
     /**
@@ -38,7 +38,7 @@ class EntrepreneurController extends Controller
      */
     public function create()
     {
-        return view('admin.entrepreneurs.create');
+        return view('admin.jobs.create');
     }
 
     /**
@@ -52,47 +52,38 @@ class EntrepreneurController extends Controller
         //VALIDATE DATA
 
         $this->validate($request, [
-               'name' => 'required',
                'title' => 'required',
                'content' => 'required',
-               'facebook' => '',
-               'twitter' => '',
-               'linkedin' => '',
-               'entrepreneur_image' => 'mines:pdf'
+               'job_image' => 'sometimes|image'
           ]);
 
           // STORE DATA TO THE DATABASE
 
-         $entrepreneur = new Entrepreneur; 
+         $job = new Job; 
 
-         $entrepreneur->name = $request->input('name');
-         $entrepreneur->title = $request->input('title');
-         $entrepreneur->content = $request->input('content');
-         $entrepreneur->facebook = $request->input('facebook');
-         $entrepreneur->twitter = $request->input('twitter');
-         $entrepreneur->linkedin = $request->input('linkedin');
-
+         $job->title = $request->input('title');
+         $job->content = $request->input('content');
             //HERE WE save the image
-            if($request->hasFile('entrepreneur_image')) {
-                $image = $request->file('entrepreneur_image');
+            if($request->hasFile('job_image')) {
+                $image = $request->file('job_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $fille = time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/entrepreneur/' . $filename);
-                $loca = public_path('images/entrepreneur-thumnail/' . $fille);
+                $location = public_path('images/job/' . $filename);
+                $loca = public_path('images/job-thumnail/' . $fille);
                 Image::make($image)->save($location);
                 Image::make($image)->save($loca);
 
-                $entrepreneur->image = $filename;
-                $entrepreneur->image = $fille; 
+                $job->image = $filename;
+                $job->image = $fille; 
 
-                $entrepreneur->save();
+                $job->save();
             }
 
 
          //save
-            $entrepreneur->save();
+            $job->save();
 
-           return redirect()->route('entrepreneur.show', $entrepreneur->id);
+           return redirect()->route('job.show', $job->id);
     }
 
     /**
@@ -103,9 +94,9 @@ class EntrepreneurController extends Controller
      */
     public function show($id)
     {
-        $entrepreneur = Entrepreneur::find($id);
+        $job = Job::findorFail($id);
 
-        return view('admin.entrepreneurs.show')->with('entrepreneur', $entrepreneur);
+        return view('admin.jobs.show')->with('job', $job);
     }
 
     /**
@@ -117,10 +108,10 @@ class EntrepreneurController extends Controller
     public function edit($id)
     {
         // Assign or find the $id of each field
-        $entrepreneur = Entrepreneur::find($id);
+        $job = Job::findorFail($id);
         
         // Return the view page here
-        return view('admin.entrepreneurs.edit')->with('entrepreneur', $entrepreneur); 
+        return view('admin.jobs.edit')->with('job', $job); 
     }
 
     /**
@@ -132,58 +123,51 @@ class EntrepreneurController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $entrepreneur = Entrepreneur::find($id);
+        $job = Job::findorFail($id);
         
              $this->validate($request, [
-               'name' => 'required',
                'title' => 'required',
                'content' => 'required',
-               'facebook' => '',
-               'twitter' => '',
-               'linkedin' => ''
+               'job_image' => 'sometimes|image'
           ]); 
     
 
        // save the data to the database NOTE :: here it is different from the other once
 
-           $entrepreneur = Entrepreneur::find($id);
+           $job = Job::findorFail($id);
 
-             $entrepreneur->name = $request->input('name');
-             $entrepreneur->title = $request->input('title');
-             $entrepreneur->content = $request->input('content');
-             $entrepreneur->facebook = $request->input('facebook');
-             $entrepreneur->twitter = $request->input('twitter');
-             $entrepreneur->linkedin = $request->input('linkedin');
+             $job->title = $request->input('title');
+             $job->content = $request->input('content');
 
            //HERE WE are checking if someone added a photo or not
-           if ($request->hasFile('entrepreneur_image')) {
+           if ($request->hasFile('job_image')) {
 
                #Add new photo
-                $image = $request->file('entrepreneur_image');
+                $image = $request->file('job_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $fille = time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/entrepreneur/' . $filename);
-                $loca = public_path('images/entrepreneur-thumnail/' . $fille);
+                $location = public_path('images/job/' . $filename);
+                $loca = public_path('images/job-thumnail/' . $fille);
                 Image::make($image)->save($location);
                 Image::make($image)->save($loca);
 
-                $oldFilename = $entrepreneur->image;
+                $oldFilename = $job->image;
 
 
                 //here we update the database
-                $entrepreneur->image = $filename;
-                $entrepreneur->image = $fille;  
+                $job->image = $filename;
+                $job->image = $fille;  
 
                # Delete the old photo
                 Storage::delete($oldFilename);
            }
 
-            $entrepreneur->save(); // this is the part that updates the changes      
+            $job->save(); // this is the part that updates the changes      
 
 
         // Redirect to the post.show
 
-            return redirect()->route('entrepreneur.show', $entrepreneur->id);
+            return redirect()->route('job.show', $job->id);
     }
 
     /**
@@ -195,12 +179,12 @@ class EntrepreneurController extends Controller
     public function destroy($id)
     {
          //Here we collect the $id
-        $entrepreneur = Entrepreneur::find($id);
-        Storage::delete($entrepreneur->image);
+        $job = job::findorFail($id);
+        Storage::delete($job->image);
 
-         $entrepreneur->delete();
+         $job->delete();
 
-         return redirect()->route('entrepreneur.index');
+         return redirect()->route('job.index');
     }
 
 }
