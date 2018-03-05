@@ -42,96 +42,33 @@
 								
 								<!-- CATEGORY 1 START -->
 								<div class="widget clearfix">
-									<h2 class='title'>Category 1</h2>
+									<h2 class='title'>Health Section</h2>
 									<div class="cont topLists">
 										<ul class="topimages">
+											@foreach($post as $post)
 											<li>
 												<figure>
-													<div class="topListimages"><a href="single.html"><img alt=" " src="img/steering.jpg"/></a>
-														<a href="single.html"><div class="overlay"></div></a>
+													<div class="topListimages"><a href="{{ url('healthtips/'.$post->id)}}"><img alt=" " src="{{ asset('images/health/' . $post->image)}}"/></a>
+														<a href="{{ url('healthtips/'.$post->id)}}"><div class="overlay"></div></a>
 														<div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
 														<div class="toptitle">
-															<div class="cap-date"> 17 Apr 2015</div>
+															<div class="cap-date"> {{ date('M j, Y', strtotime($post->created_at)) }}</div>
 															<div class="clearfix"></div>
-															<a href="single.html">Nam detraxit disputando efficiantur cu, nisl.</a>
+															<a href="{{ url('healthtips/'.$post->id)}}">{!! substr(strip_tags($post->title), 0, 150) !!} {{ strlen(strip_tags($post->title)) > 150 ? "..." : ""  }}</a>
 														</div>
 													</div>
 													<figcaption>
 														<div class="toptext">
-															<p>Ei brute deserunt delicata nam, mundi moderatius ex quo. Id per modo molestie lobortis, perfecto corrumpit omittantur nec an. Alb...</p>
+															<p>{!! substr(strip_tags($post->content), 0, 150) !!} {{ strlen(strip_tags($post->content)) > 150 ? "..." : ""  }}</p>
 														</div>
 													</figcaption>
 												</figure>
 											</li>
+											@endforeach
 											
-											<li>
-												<figure>
-													<div class="topListimages"><a href="single.html"><img alt=" " src="img/antique.jpg"/></a>
-														<a href="single.html"><div class="overlay"></div></a>
-														<div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
-														<div class="toptitle">
-															<div class="cap-date"> 12 Apr 2015</div>
-															<div class="clearfix"></div>
-															<a href="single.html">Nostro suavitate intellegam id mei, mea ex agam.</a>
-														</div>
-													</div>
-													<figcaption>
-														<div class="toptext">
-															<p>Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna id...</p>
-														</div>
-													</figcaption>
-												</figure>
-											</li>
-											
-											<li>
-												<figure>
-													<div class="topListimages"><a href="single.html"><img alt=" " src="img/guitar.jpg"/></a>
-														<a href="single.html"><div class="overlay"></div></a>
-														<div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
-														<div class="toptitle">
-															<div class="cap-date"> 11 Apr 2015</div>
-															<div class="clearfix"></div>
-															<a href="single.html">Et eum aliquip iuvaret dignissim, dicant epicurei.</a>
-														</div>
-													</div>
-													<figcaption>
-														<div class="toptext">
-															<p>Nisl malis veritus pro no, pro an enim admodum mediocritatem. Ei his graeci option officiis, no oratio vocent efficiendi vix. Eu ...</p>
-														</div>
-													</figcaption>
-												</figure>
-											</li>
 										</ul>
 									</div>
 								</div><!-- CATEGORY 1 END -->
-								
-								<!-- CATEGORY 2 START -->
-								<div class="widget">
-									<h2 class='title'>Category 2</h2>
-									<div class="cont topLists">
-										<ul class="topimages">
-											<li>
-												<figure>
-													<div class="topListimages"><a href="single.html"><img alt=" " src="img/pretty-woman.jpg"/></a>
-														<a href="single.html"><div class="overlay"></div></a>
-														<div class="cap-comment"><i class="fa fa-comment"></i> 13</div>
-														<div class="toptitle">
-															<div class="cap-date"> 18 Apr 2015</div>
-															<div class="clearfix"></div>
-															<a href="single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-														</div>
-													</div>
-													<figcaption>
-														<div class="toptext">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut e...</p>
-														</div>
-													</figcaption>
-												</figure>
-											</li>
-										</ul>
-									</div>
-								</div><!-- CATEGORY 2 END -->
-								
 							</div>
 						</div>					
 					</div><!-- LEFT SIDEBAR END -->
@@ -152,16 +89,16 @@
 											<li>
 												<figure>{{---- Make sure you provide a detail links to the main section of the website site where you can visit and get more information -----}}
 													<div class="topListimages">
-														<a href=""><img alt="" src="{{asset('images/job-thumnail/'.$job->image)}}" /></a>
-														<a href="single.html"><div class="overlay"></div></a>
+														<a href="{{ url('jobb/'.$job->id)}}"><img alt="" src="{{asset('images/job-thumnail/'.$job->image)}}" /></a>
+														<a href="{{ url('jobb/'.$job->id)}}"><div class="overlay"></div></a>
 													</div>
 													<figcaption>
-														<div class="toptext"><a href="single.html">{{ $job->title }}</a>
+														<div class="toptext"><a href="{{ url('jobb/'.$job->id)}}">{{ $job->title }}</a>
 															<div class="date-info clearfix">
 																<div class="cap-author"><i class="fa fa-pencil-square-o"></i> Powered By Quatess</div>
 																<div class="cap-date"> {{ date('M j, Y', strtotime($job->created_at)) }}</div>
 															</div>
-															<p>{!! $job->content !!}</p>
+															<p>{!! substr(strip_tags($job->content), 0, 250) !!} {{ strlen(strip_tags($job->content)) > 250 ? "..." : ""  }}</p>
 														</div>
 													</figcaption>
 												</figure>
@@ -174,15 +111,11 @@
 							</div><!-- BLOG POSTS END -->
 							
 							<!-- PAGINATION START -->
-							<div class="pagenav">
-								<span class="pages">Page 1 of 4</span>
-								<a href="#">Prev</a>
-								<a href="#">1</a>
-								<span class="current">2</span>
-								<a href="#">3</a>
-								<a href="#">Next</a>
-								<a href="#">Last</a>
-							</div><!-- PAGINATION END -->
+                            <div class="pagenav">
+                                <ul class="pagination">
+                                    {{ $jobs->links() }}
+                                </ul>
+                            </div><!-- PAGINATION END -->
 							
 						</div>
 					</div>
@@ -200,45 +133,20 @@
 									<h2 class="title">POPULAR POSTS</h2>
 									<div class="widget-content popular-posts">
 										<ul>
-										
+										  @foreach($last as $last)
 											<li>
 												<div class="item-content">
 													<div class="item-thumbnail">
-														<a href="single.html"><img alt="" src="img/mobility.jpg"/></a>
-														<a href="single.html"><div class="overlay"></div></a>
+														<a href="{{ url('entre/'.$last->id)}}"><img alt="" src="{{asset('images/entrepreneur-thumnail/'.$last->image)}}"/></a>
+														<a href="{{ url('entre/'.$last->id)}}"><div class="overlay"></div></a>
 														<div class="item-title">
-															<a href="single.html">What to do Between Training Cycles</a>
+															<a href="{{ url('entre/'.$last->id)}}">{!! substr(strip_tags($last->title), 0, 150) !!} {{ strlen(strip_tags($last->title)) > 150 ? "..." : ""  }}</a>
 														</div>
 													</div>
-													<div class="item-snippet">You have two options. The first (and easiest) would be to use this period between marathon training cycles for active rest. Continue to trai...</div>
+													<div class="item-snippet">{!! substr(strip_tags($last->content), 0, 150) !!} {{ strlen(strip_tags($last->content)) > 150 ? "..." : ""  }}</div>
 												</div>
 											</li>
-											
-											<li>
-												<div class="item-content">
-													<div class="item-thumbnail">
-														<a href="single.html"><img alt="" src="img/child.jpg" /></a>
-														<a href="single.html"><div class="overlay"></div></a>
-														<div class="item-title">
-															<a href="single.html">Ei his graeci option officiis, no oratio vocent efficiendi vix.</a>
-														</div>
-													</div>
-													<div class="item-snippet">Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna idque, est ve...</div>
-												</div>
-											</li>
-
-											<li>
-												<div class="item-content">
-													<div class="item-thumbnail">
-														<a href="single.html"><img alt="" src="img/office.jpg" /></a>
-														<a href="single.html"><div class="overlay"></div></a>
-														<div class="item-title">
-															<a href="single.html">Ei his graeci option officiis, no oratio vocent efficiendi vix.</a>
-														</div>
-													</div>
-													<div class="item-snippet">Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna idque, est ve...</div>
-												</div>
-											</li>
+											@endforeach
 											
 										</ul>
 									</div>

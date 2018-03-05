@@ -56,8 +56,8 @@ class TechnologyCommentController extends Controller
         $technologycomment->email = $request->email;
         $technologycomment->comment = $request->comment;
         $technologycomment->reply = $request->reply;
-        $technologcomment->reply_name = $request->reply_name;
-        $technologybusinesscomment->approve = $request->approve;
+        $technologycomment->reply_name = $request->reply_name;
+        $technologycomment->approve = $request->approve;
 
         $technologycomment->technology()->associate($technology);
 
@@ -117,7 +117,7 @@ class TechnologyCommentController extends Controller
          {
             $technologycomment = TechnologyComment::find($id);
 
-            return view('technologycomments.delete')->withComment($comment);
+            return view('technologycomments.delete')->withTechnologycomment($comment);
          }
 
     /**

@@ -77,7 +77,9 @@ class TeamController extends Controller
                 $image = $request->file('team_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/team/' . $filename);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
 
                 $team->image = $filename;
 
@@ -159,7 +161,9 @@ class TeamController extends Controller
                 $image = $request->file('team_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/team/' . $filename);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
 
                 $oldFilename = $team->image;
 

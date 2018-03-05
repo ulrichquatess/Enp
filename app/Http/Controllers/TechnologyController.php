@@ -70,7 +70,9 @@ class TechnologyController extends Controller
                 $image = $request->file('technology_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/technology/' . $filename);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
 
                 $technology->image = $filename;
 
@@ -144,7 +146,9 @@ class TechnologyController extends Controller
                 $image = $request->file('technology_image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/technology/' . $filename);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
 
                 $oldFilename = $technology->image;
 

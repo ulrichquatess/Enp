@@ -70,7 +70,9 @@ class HealthController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/health/' . $filename);
                 $loca = public_path('images/health-thumnail/' . $fille);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $health->image = $filename;
@@ -148,7 +150,9 @@ class HealthController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/health/' . $filename);
                 $loca = public_path('images/health-thumnail/' . $fille);
-                Image::make($image)->resize(640, 427)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $oldFilename = $health->image;

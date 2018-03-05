@@ -41,12 +41,17 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('entre/{id}', ['as' => 'ENP.single-entrepreneur', 'uses' => 'BlogController@getSingleEntrepreneur'])->where('id', '[\w\d\-\_]+');
     Route::get('bussi/{id}', ['as' => 'ENP.single-business', 'uses' => 'BlogController@getSingleBusiness'])->where('id', '[\w\d\-\_]+');
     Route::get('tech/{id}', ['as' => 'ENP.single-technology', 'uses' => 'BlogController@getSingleTechnology'])->where('id', '[\w\d\-\_]+');
+    Route::get('healthtips/{id}', ['as' => 'ENP.single-health', 'uses' => 'BlogController@getSingleHealth'])->where('id', '[\w\d\-\_]+');
+    Route::get('celebrities/{id}', ['as' => 'ENP.single-celebrity', 'uses' => 'BlogController@getSingleCelebrity'])->where('id', '[\w\d\-\_]+');
+    Route::get('jobb/{id}', ['as' => 'ENP.single-job', 'uses' => 'BlogController@getSingleJob'])->where('id', '[\w\d\-\_]+');
     Route::get('/contact', 'BlogController@contact');
     Route::post('contact', 'BlogController@postContact');
     Route::get('/entrepreneurialsection', 'BlogController@entrepreneur');
     Route::get('/businesssection', 'BlogController@business');
     Route::get('/technologysection', 'BlogController@technology');
     Route::get('/jobsection', 'BlogController@job');
+    Route::get('/celebritiessection', 'BlogController@celebrities');
+    Route::get('/healthsection', 'BlogController@health');
     Route::get('/teams', 'BlogController@team');
     Route::get('teamm/{id}', ['as' => 'ENP.single-team', 'uses' => 'BlogController@getSingleTeam'])->where('id', '[\w\d\-\_]+');
     //The controller above controls the main pages for the BME technology especially the SolarController
@@ -104,8 +109,30 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::delete('technologycomments/{id}',  ['as' => 'technologycomments.destroy', 'uses' => 'TechnologyCommentController@destroy']);
 
-    Route::get('technologycomments/{id}/delete', ['uses' => 'BusinessCommentController@delete', 'as' => 'technologycomments.delete']); 
-	});
+    Route::get('technologycomments/{id}/delete', ['uses' => 'TechnologyCommentController@delete', 'as' => 'technologycomments.delete']); 
+
+ // This Part Now is for the Health Comment Sections
+     Route::post('healthcomments/{health_id}',  ['as' => 'healthcomments.store', 'uses' => 'HealthCommentController@store']);
+
+    Route::get('healthcomments/{id}/edit',  ['as' => 'healthcomments.edit', 'uses' => 'HealthCommentController@edit']);
+
+    Route::put('healthcomments/{id}',  ['as' => 'healthcomments.update', 'uses' => 'HealthCommentController@update']);
+
+    Route::delete('healthcomments/{id}',  ['as' => 'healthcomments.destroy', 'uses' => 'HealthCommentController@destroy']);
+
+    Route::get('healthcomments/{id}/delete', ['uses' => 'HealthCommentController@delete', 'as' => 'healthcomments.delete']); 
+
+    // This Part Now is for the Celebrities Comment Sections
+     Route::post('artistcomments/{artist_id}',  ['as' => 'artistcomments.store', 'uses' => 'ArtistCommentController@store']);
+
+    Route::get('artistcomments/{id}/edit',  ['as' => 'artistcomments.edit', 'uses' => 'ArtistCommentController@edit']);
+
+    Route::put('artistcomments/{id}',  ['as' => 'artistcomments.update', 'uses' => 'ArtistCommentController@update']);
+
+    Route::delete('artistcomments/{id}',  ['as' => 'artistcomments.destroy', 'uses' => 'ArtistCommentController@destroy']);
+
+    Route::get('artistcomments/{id}/delete', ['uses' => 'ArtistCommentController@delete', 'as' => 'artistcomments.delete']); 
+  });
 
 // This is a demo portion
 Route::resource('apply', 'AvoCareersController');

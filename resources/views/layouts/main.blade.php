@@ -57,6 +57,8 @@
                                     <li><a href="/entrepreneurialsection">Entrepreneurial Blog</a></li>
                                     <li><a href="/businesssection">Business Blog</a></li>
                                     <li><a href="/technologysection">Technology Blog</a></li>
+                                    <li><a href="/healthsection">Health section</a></li>
+                                    <li><a href="/celebritiessection">Celebrities section</a></li>
                                     <li><a href="/jobsection">Job Opportunity section</a></li>
                                     <li><a href="/teams">Our Team</a></li>
                                     <!-- This Part of the Dropdown shall contain all the different complete Blog for the different Category -->

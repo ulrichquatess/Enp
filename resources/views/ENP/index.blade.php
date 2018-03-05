@@ -15,7 +15,6 @@
 									<div class="large-section">
 										<a href="single.html"><img alt="" src="{{asset('images/entrepreneur-thumnail/'.$entrepreneur->image)}}" style="background-size: cover; background-position: center;"/></a>
 										<a href="{{ url('entre/'.$entrepreneur->id)}}"><div class="overlay"></div></a>
-										<div class="top-comment"> <i class="fa fa-comment"></i> 3</div>
 										<div class="feat-cap">
 											<ul class="cap-meta">
 												<li class="cap-date"> {{ date( 'M j Y ', strtotime( $entrepreneur->updated_at ))}}</li>
@@ -45,7 +44,6 @@
 									<div class="large-section">
 										<a href="{{ url('entre/'.$update->id)}}"><img alt="" src="{{asset('images/entrepreneur-thumnail/'.$update->image)}}" style="background-size: cover; background-position: center;"/></a>
 										<a href="{{ url('entre/'.$update->id)}}"><div class="overlay"></div></a>
-										<div class="top-comment"> <i class="fa fa-comment"></i> 3</div>
 										<div class="feat-cap">
 											<ul class="cap-meta">
 												<li class="cap-date"> {{ date( 'M j Y ', strtotime( $entrepreneur->updated_at ))}}</li>
@@ -115,117 +113,32 @@
                                 
                                 <!-- CATEGORY 1 START -->
                                 <div class="widget clearfix">
-                                    <h2 class='title'>Category 1</h2>
+                                    <h2 class='title'>Job & Scholarship Opportunity</h2>
                                     <div class="cont topLists">
                                         <ul class="topimages">
+                                            @foreach($job as $job)
                                             <li>
                                                 <figure>
-                                                    <div class="topListimages"><a href="single.html"><img alt=" " src="{{ asset('assets/Blog/img/steering.jpg')}}"/></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
+                                                    <div class="topListimages"><a href=""><img alt=" " src="{{asset('images/job-thumnail/'.$job->image)}}"/></a>
+                                                        <a href="{{ url('jobb/'.$job->id)}}"><div class="overlay"></div></a>
                                                         <div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
                                                         <div class="toptitle">
-                                                            <div class="cap-date"> 17 Apr 2015</div>
+                                                            <div class="cap-date">{{ date( 'M j Y h:ia ', strtotime( $job->created_at ))}}</div>
                                                             <div class="clearfix"></div>
-                                                            <a href="single.html">Nam detraxit disputando efficiantur cu, nisl.</a>
+                                                            <a href="{{ url('jobb/'.$job->id)}}">{{ substr(strip_tags($job->title), 0, 70) }} {{ strlen(strip_tags($job->title)) > 70 ? "..." : ""  }}</a>
                                                         </div>
                                                     </div>
                                                     <figcaption>
                                                         <div class="toptext">
-                                                            <p>Ei brute deserunt delicata nam, mundi moderatius ex quo. Id per modo molestie lobortis, perfecto corrumpit omittantur nec an. Alb...</p>
+                                                            <p>{{ substr(strip_tags($job->content), 0, 200) }} {{ strlen(strip_tags($job->content)) > 200 ? "..." : ""  }}</p>
                                                         </div>
                                                     </figcaption>
                                                 </figure>
                                             </li>
-                                            
-                                            <li>
-                                                <figure>
-                                                    <div class="topListimages"><a href="single.html"><img alt=" " src="{{ asset('assets/Blog/img/antique.jpg')}}"/></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
-                                                        <div class="toptitle">
-                                                            <div class="cap-date"> 12 Apr 2015</div>
-                                                            <div class="clearfix"></div>
-                                                            <a href="single.html">Nostro suavitate intellegam id mei, mea ex agam.</a>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="toptext">
-                                                            <p>Lorem ipsum eu usu assum liberavisse, ut munere praesent complectitur mea. Sit an option maiorum principes. Ne per probo magna id...</p>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </li>
-                                            
-                                            <li>
-                                                <figure>
-                                                    <div class="topListimages"><a href="single.html"><img alt=" " src="{{ asset('assets/Blog/img/guitar.jpg')}}"/></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="cap-comment"><i class="fa fa-comment"></i> 3</div>
-                                                        <div class="toptitle">
-                                                            <div class="cap-date"> 11 Apr 2015</div>
-                                                            <div class="clearfix"></div>
-                                                            <a href="single.html">Et eum aliquip iuvaret dignissim, dicant epicurei.</a>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="toptext">
-                                                            <p>Nisl malis veritus pro no, pro an enim admodum mediocritatem. Ei his graeci option officiis, no oratio vocent efficiendi vix. Eu ...</p>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </li>
-                                        </ul>
+                                            @endforeach
+                                      </ul>
                                     </div>
                                 </div><!-- CATEGORY 1 END -->
-                                
-                                <!-- CATEGORY 2 START -->
-                                <div class="widget">
-                                    <h2 class='title'>Category 2</h2>
-                                    <div class="cont topLists">
-                                        <ul class="topimages">
-                                            <li>
-                                                <figure>
-                                                    <div class="topListimages"><a href="single.html"><img alt=" " src="{{ asset('assets/Blog/img/pretty-woman.jpg')}}"/></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="cap-comment"><i class="fa fa-comment"></i> 13</div>
-                                                        <div class="toptitle">
-                                                            <div class="cap-date"> 18 Apr 2015</div>
-                                                            <div class="clearfix"></div>
-                                                            <a href="single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="toptext">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut e...</p>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </li>
-                                            
-                                    
-                                            
-                                            <li>
-                                                <figure>
-                                                    <div class="topListimages"><a href="single.html"><img alt=" " src="{{ asset('assets/Blog/img/women.jpg')}}"/></a>
-                                                        <a href="single.html"><div class="overlay"></div></a>
-                                                        <div class="cap-comment"><i class="fa fa-comment"></i> 0</div>
-                                                        <div class="toptitle">
-                                                            <div class="cap-date"> 12 Apr 2015</div>
-                                                            <div class="clearfix"></div>
-                                                            <a href="single.html">Albucius intellegam scripserit et cum, no mei porro tantas</a>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption>
-                                                        <div class="toptext">
-                                                            <p>Ei brute deserunt delicata nam, mundi moderatius ex quo. Id per modo molestie lobortis, perfecto corrumpit omittantur nec an. Alb...</p>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div><!-- CATEGORY 2 END -->
-                                
                             </div>
                         </div>
                     </div><!-- LEFT SIDEBAR END -->
@@ -241,7 +154,7 @@
                                         
                                         <!-- CATEGORY 3 START -->
                                         <div class="widget">
-                                            <h2 class="title">Entrepreneur</h2>
+                                            <h2 class="title">Entrepreneur & Business</h2>
                                             
                                             <div class="news_pictures">
                                                 <ul class="news_pictures_list clearfix">
@@ -272,16 +185,16 @@
                                         
                                         <!-- CATEGORY 4 START -->
                                         <div class="widget">
-                                            <h2 class='title'> Entrepreneur & Bussiness</h2>
+                                            <h2 class='title'> Health Section </h2>
                                             <div class="magstyle clearfix">
-                                                <div class="magstyle_wide left">
+                                                <div class="magstyle_wide left"> <!--This Part works with the health section -->
                                                     @foreach($singlebusiness as $singlebusiness)
                                                     <div class="thumb">
-                                                        <a href="{{ url('bussi/'.$singlebusiness->id)}}"><img alt=" " src="{{asset('images/business/'.$singlebusiness->image)}}" /></a>
-                                                        <a href="{{ url('bussi/'.$singlebusiness->id)}}"><div class="overlay"></div></a>
+                                                        <a href="{{ url('healthtips/'.$singlebusiness->id)}}"><img alt=" " src="{{asset('images/health/'.$singlebusiness->image)}}" /></a>
+                                                        <a href="{{ url('healthtips/'.$singlebusiness->id)}}"><div class="overlay"></div></a>
                                                     </div>
                                                     <div class="featuredPost lastPost">
-                                                        <h3 class="postTitle"><a href="{{ url('bussi/'.$singlebusiness->id)}}">{{ substr(strip_tags($singlebusiness->title), 0, 50) }} {{ strlen(strip_tags($singlebusiness->title)) > 70 ? "..." : ""  }}</a></h3>
+                                                        <h3 class="postTitle"><a href="{{ url('healthtips/'.$singlebusiness->id)}}">{{ substr(strip_tags($singlebusiness->title), 0, 50) }} {{ strlen(strip_tags($singlebusiness->title)) > 70 ? "..." : ""  }}</a></h3>
                                                         <div class="date-info clearfix">
                                                             <div class="cap-date">{{ date( 'M j Y ', strtotime( $singlebusiness->updated_at ))}}</div>
                                                             <div class="cap-comment"><i class="fa fa-comment"></i> 2</div>
@@ -294,21 +207,19 @@
                                                     <div class="magstyle_narrow">
                                                         <ul>
 
-                                                @foreach($business as $business)
+                                                @foreach($health as $health)
                                                             <li>
                                                                 <div class="thumb">
-                                                                    <a href="{{ url('bussi/'.$business->id)}}"><img alt=" " src="{{ asset('images/business/' .$business->image) }}" /></a>
-                                                                    <a href="{{ url('bussi/'.$business->id)}}"><div class="overlay"></div></a>
+                                                                    <a href="{{ url('healthtips/'.$health->id)}}"><img alt=" " src="{{asset('images/health-thumnail/'.$health->image)}}" /></a>
+                                                                    <a href=""><div class="overlay"></div></a>
                                                                 </div>
                                                                 <div class="date-info clearfix">
-                                                                    <div class="cap-date">{{ date( 'M j Y ', strtotime( $business->updated_at ))}}</div>
+                                                                    <div class="cap-date">{{ date( 'M j Y ', strtotime( $health->updated_at ))}}</div>
                                                                     <div class="cap-comment"><i class="fa fa-comment"></i> 1</div>
                                                                 </div>
-                                                                <div class="featuredTitle"><a href="{{ url('bussi/'.$business->id)}}">{{ substr(strip_tags($business->title), 0, 60) }} {{ strlen(strip_tags($business->title)) > 100 ? "..." : ""  }}</a></div>
+                                                                <div class="featuredTitle"><a href="{{ url('healthtips/'.$health->id)}}">{{ substr(strip_tags($health->title), 0, 60) }} {{ strlen(strip_tags($health->title)) > 100 ? "..." : ""  }}</a></div>
                                                             </li>
-                                                            
-                                                           
-                                                      @endforeach                                                                  
+                                                @endforeach                                                                  
             				<!-- The Part Above Is use to add the businnes logic  -->
                                                             
                                                         </ul>
@@ -1263,10 +1174,10 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-thumbnail">
-                                                        <a href="single.html"><img alt="" src="{{asset('images/artist/'.$artist->image)}}"/></a>
+                                                        <a href="{{ url('celebrities/'.$artist->id)}}"><img alt="" src="{{asset('images/artist/'.$artist->image)}}"/></a>
                                                         <a href="single.html"><div class="overlay"></div></a>
                                                         <div class="item-title">
-                                                            <a href="single.html">{{ $artist->title}}</a>
+                                                            <a href="{{ url('celebrities/'.$artist->id)}}">{{ $artist->title}}</a>
                                                         </div>
                                                     </div>
                                                     <div class="item-snippet">{{ substr(strip_tags($artist->title), 0, 400) }} {{ strlen(strip_tags($artist->title)) > 400 ? "..." : "" }}</div>
@@ -1283,106 +1194,6 @@
                                 <h2 class="title">SPONSOR</h2>
                                 <div style="width: 300px; height: 250px; background: #ddd; text-align: center; display: inline-block; color: #bbb; font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 1.2rem; white-space: nowrap; padding: 0; overflow: hidden; line-height: 250px;">AD 300X250</div>
                             </div><!-- SIDEBAR SPONSOR END -->
-                            
-                            <!-- CATEGORY 16 START 
-                            <div class="widget">
-                                <h2 class="title">Category 16</h2>
-                                <div class='cont topLists'>
-                                    <ul class="topimages">
-                                    
-                                        <li>
-                                            <figure>
-                                                <div class="topListimages">
-                                                  <a href="single.html"><img alt=" " src="img/ship.jpg"/></a>
-                                                    <a href="single.html"><div class="overlay"></div></a>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="toptext">
-                                                        <div class="date-info clearfix">
-                                                            <div class="cap-date">  14 Jan 2016</div>
-                                                            <div class="cap-comment"> <i class="fa fa-comment"></i> 3</div>
-                                                        </div>
-                                                        <a href="single.html">Women in Hollywood, according to new study</a>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                        
-                                        <li>
-                                            <figure>
-                                                <div class="topListimages">
-                                                  <a href="single.html"><img alt=" " src="img/kayak.jpg"/></a>
-                                                    <a href="single.html"><div class="overlay"></div></a>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="toptext">
-                                                        <div class="date-info clearfix">
-                                                            <div class="cap-date">  13 Jan 2016</div>
-                                                            <div class="cap-comment"> <i class="fa fa-comment"></i> 13</div>
-                                                        </div>
-                                                        <a href="single.html">The age of first-time mothers is rising faster in the US</a>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                        
-                                        <li>
-                                            <figure>
-                                                <div class="topListimages">
-                                                  <a href="single.html"><img alt=" " src="img/fiat-500.jpg"/></a>
-                                                    <a href="single.html"><div class="overlay"></div></a>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="toptext">
-                                                        <div class="date-info clearfix">
-                                                            <div class="cap-date">  11 Jan 2016</div>
-                                                            <div class="cap-comment"> <i class="fa fa-comment"></i> 1</div>
-                                                        </div>
-                                                        <a href="single.html">Baby brain doesn't exist say scientists</a>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                        
-                                        <li>
-                                            <figure>
-                                                <div class="topListimages">
-                                                  <a href="single.html"><img alt=" " src="img/resort.jpg"/></a>
-                                                    <a href="single.html"><div class="overlay"></div></a>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="toptext">
-                                                        <div class="date-info clearfix">
-                                                            <div class="cap-date">  11 Jan 2016</div>
-                                                            <div class="cap-comment"> <i class="fa fa-comment"></i> 18</div>
-                                                        </div>
-                                                        <a href="single.html">Oscar Oscar nominations to be announced</a>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                        
-                                        <li>
-                                            <figure>
-                                                <div class="topListimages">
-                                                  <a href="single.html"><img alt=" " src="img/guitarist.jpg"/></a>
-                                                    <a href="single.html"><div class="overlay"></div></a>
-                                                </div>
-                                                <figcaption>
-                                                    <div class="toptext">
-                                                        <div class="date-info clearfix">
-                                                            <div class="cap-date">  10 Jan 2016</div>
-                                                            <div class="cap-comment"> <i class="fa fa-comment"></i> 15</div>
-                                                        </div>
-                                                        <a href="single.html">Friends cast back together for special</a>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </li>
-                                        
-                                    </ul>
-                                </div>
-                            </div> CATEGORY 16 END -->
                             
                         </div>
                     </div>

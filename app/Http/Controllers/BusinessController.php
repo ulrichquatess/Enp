@@ -73,7 +73,9 @@ class BusinessController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/business/' . $filename);
                 $loca = public_path('images/business-thumnail/' . $fille);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $business->image = $filename;
@@ -153,7 +155,9 @@ class BusinessController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/business/' . $filename);
                 $loca = public_path('images/business-thumnail/' . $fille);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $oldFilename = $business->image;

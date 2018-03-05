@@ -70,7 +70,9 @@ class ReligionController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/religion/' . $filename);
                 $loca = public_path('images/religion-thumnail/' . $fille);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $religion->image = $filename;
@@ -148,7 +150,9 @@ class ReligionController extends Controller
                 $fille = time() . '.' . $image->getClientOriginalExtension();
                 $location = public_path('images/religion/' . $filename);
                 $loca = public_path('images/religion-thumnail/' . $fille);
-                Image::make($image)->save($location);
+                Image::make($image)->resize(534, 356, function($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
                 Image::make($image)->save($loca);
 
                 $oldFilename = $religion->image;
